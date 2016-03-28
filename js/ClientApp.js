@@ -1,41 +1,18 @@
+var React = require('react')
+var ReactDOM = require('react-dom')
+
 var div = React.DOM.div
-var h1 = React.DOM.h1
-
-var juan = {
-  hola(){
-    return "como estas"
-  }
-}
-
-var bla = React.createClass({
-  render() {
-    return (
-      <div>Hola</div>
-    )
-  }
-})
-
-var MyTitle = React.createClass({
-  render () {
-    return (
-      div(null,
-        h1(null, "Check Out this other thing")
-      )
-    )
-  }
-})
-
-
+var MyTitle = require('./myTitle')
 
 var MyTitleFac = React.createFactory(MyTitle)
 
-
 var MyFirstComponent = (
-  div({style:{color: "red"}},
-    MyTitleFac(null), // Different but same
-    React.createElement(MyTitle, null),
-    React.createElement(MyTitle, null),
-    React.createElement(MyTitle, null)
+  div({style: {color: 'red'}},
+    MyTitleFac({title: 'props are grate'}), // Different but same
+    React.createElement(MyTitle, {title: 'props use everywhere', color: 'red'}),
+    React.createElement(MyTitle, {title: 'another title', color: 'mediumaquamarine'}),
+    React.createElement(MyTitle, {title: 'yay other title', color: 'peru'}),
+    React.createElement(MyTitle, {title: 'yay other title', color: 'papayawhip'})
   )
 )
 
