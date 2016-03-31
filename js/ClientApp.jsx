@@ -1,13 +1,16 @@
 const React = require('react')
 const ReactDOM = require('react-dom')
-const {Router, Route, hashHistory} = require('react-router')
+const {Router, IndexRoute, Route, hashHistory} = require('react-router')
+const Layout = require('./layout')
 const Landing = require('./landing')
 const Search = require('./search')
 
 const App = () => (
   <Router history={hashHistory}>
-    <Route path='/' component={Landing} />
-    <Route path='/search' component={Search} />
+    <Route path='/' component={Layout}>
+      <IndexRoute component={Landing} />
+      <Route path='/search' component={Search} />
+    </Route>
   </Router>
 )
 
