@@ -16,10 +16,21 @@ module.exports = {
     chunks: false
   },
   module: {
+    preLoaders: [
+      {
+        test: /\.jsx?$/,
+        loader: 'eslint-loader',
+        exclude: /node_modules/
+      }
+    ],
     loaders: [
       {
         test: /\.jsx?$/,
         loader: 'babel-loader' // everything that mathces the regex is goign to run throght the loaders
+      },
+      {
+        test: /\.json$/,
+        loader: 'json-loader'
       }
     ]
   }
