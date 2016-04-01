@@ -1,19 +1,20 @@
 const React = require('react')
 const { Link } = require('react-router')
-const { func, string} = React.PropTypes
+const { connector } = require('./store')
+const { func, string, bool } = React.PropTypes
 
 const Header = React.createClass({
   propTypes: {
-    handleSearchTermEvent: func,
-    searchTerm: string
+    setSearchTerm: func,
+    searchTerm: string,
+    showSearch: bool
   },
   handleSearchTerm (e) {
-    this.props.handleSearchTermEvent(e.target.value)
+    this.props.setSearchTerm(e.target.value)
   },
   render () {
     let searchUtils
-    console.log(this.props)
-    if ('handleSearchTermEvent' in this.props) {
+    if (this.props.showSearch) {
       searchUtils = <input type='text' className='search-input' placeholder='Search' value={this.props.searchTerm} onChange={this.handleSearchTerm}/>
     } else {
       searchUtils = (
@@ -33,4 +34,4 @@ const Header = React.createClass({
   }
 })
 
-module.exports = Header
+module.exports = connector(Header)

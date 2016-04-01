@@ -1,6 +1,8 @@
 const React = require('react')
 const ReactDOM = require('react-dom')
 const {Router, IndexRoute, Route, hashHistory} = require('react-router')
+const { store } = require('./store')
+const { Provider } = require('react-redux')
 const Layout = require('./layout')
 const { shows } = require('../public/data')
 const Landing = require('./landing')
@@ -22,13 +24,15 @@ const App = React.createClass({
   },
   render () {
     return (
-      <Router history={hashHistory}>
-        <Route path='/' component={Layout}>
-          <IndexRoute component={Landing} />
-          <Route path='/search' component={Search} shows={shows}/>
-          <Route path='/details/:id' component={Details} shows={shows} onEnter={this.assignShow}/>
-        </Route>
-      </Router>
+      <Provider store={store}>
+        <Router history={hashHistory}>
+          <Route path='/' component={Layout}>
+            <IndexRoute component={Landing} />
+            <Route path='/search' component={Search} shows={shows}/>
+            <Route path='/details/:id' component={Details} shows={shows} onEnter={this.assignShow}/>
+          </Route>
+        </Router>
+      </Provider>
     )
   }
 })
