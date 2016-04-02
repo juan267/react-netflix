@@ -1,35 +1,34 @@
 const React = require('react')
-const ReactDOM = require('react-dom')
 const {Router, IndexRoute, Route, hashHistory} = require('react-router')
 const { store } = require('./store')
 const { Provider } = require('react-redux')
 const Layout = require('./layout')
-const { shows } = require('../public/data')
+// const { shows } = require('../public/data') // the shows are now in redux
 const Landing = require('./landing')
 const Search = require('./search')
 const Details = require('./details')
 
 const App = React.createClass({
-  assignShow (nextState, replace) {
-    const showArray = shows.filter((show) => {
-      return show.imdbID === nextState.params.id
-    })
+  // assignShow (nextState, replace) {
+  //   const showArray = shows.filter((show) => {
+  //     return show.imdbID === nextState.params.id
+  //   })
 
-    if (showArray.length < 1) {
-      return replace('/')
-    }
+  //   if (showArray.length < 1) {
+  //     return replace('/')
+  //   }
 
-    Object.assign(nextState.params, showArray[0])
-    return nextState
-  },
+  //   Object.assign(nextState.params, showArray[0])
+  //   return nextState
+  // } this is no longer used thanks to redux,
   render () {
     return (
       <Provider store={store}>
         <Router history={hashHistory}>
           <Route path='/' component={Layout}>
             <IndexRoute component={Landing} />
-            <Route path='/search' component={Search} shows={shows}/>
-            <Route path='/details/:id' component={Details} shows={shows} onEnter={this.assignShow}/>
+            <Route path='/search' component={Search} />
+            <Route path='/details/:id' component={Details} />
           </Route>
         </Router>
       </Provider>
@@ -37,8 +36,7 @@ const App = React.createClass({
   }
 })
 
-ReactDOM.render(<App/>, document.querySelector('#app'))
-
+module.exports = App
 // const MyTitleFac = React.createFactory(MyTitle)
 
 // var MyFirstComponent = (
