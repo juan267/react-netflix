@@ -1,5 +1,5 @@
 const React = require('react')
-const {Router, IndexRoute, Route, hashHistory} = require('react-router')
+const {Router, IndexRoute, Route, browserHistory} = require('react-router')
 const { store } = require('./store')
 const { Provider } = require('react-redux')
 const Layout = require('./layout')
@@ -7,6 +7,14 @@ const Layout = require('./layout')
 const Landing = require('./landing')
 const Search = require('./search')
 const Details = require('./details')
+
+const myRoutes = () => (
+  <Route path='/' component={Layout}>
+    <IndexRoute component={Landing} />
+    <Route path='/search' component={Search} />
+    <Route path='/details/:id' component={Details} />
+  </Route>
+)
 
 const App = React.createClass({
   // assignShow (nextState, replace) {
@@ -24,17 +32,15 @@ const App = React.createClass({
   render () {
     return (
       <Provider store={store}>
-        <Router history={hashHistory}>
-          <Route path='/' component={Layout}>
-            <IndexRoute component={Landing} />
-            <Route path='/search' component={Search} />
-            <Route path='/details/:id' component={Details} />
-          </Route>
+        <Router history={browserHistory}>
+          {myRoutes()}
         </Router>
       </Provider>
     )
   }
 })
+
+App.Routes = myRoutes
 
 module.exports = App
 // const MyTitleFac = React.createFactory(MyTitle)
