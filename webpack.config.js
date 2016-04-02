@@ -5,7 +5,8 @@ module.exports = {
   entry: './js/BrowserEntry.jsx',
   output: {
     path: path.join(__dirname, '/public'),
-    filename: 'bundle.js'
+    filename: 'bundle.js',
+    'publicPath': '/public/'
   },
   resolve: {
     extensions: ['', '.js', '.jsx', '.json'] // order to look extensions for file imports
@@ -13,7 +14,7 @@ module.exports = {
   stats: {
     colors: true,
     reasons: true, // verborse error message
-    chunks: false
+    chunks: true
   },
   module: {
     preLoaders: [
